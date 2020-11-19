@@ -19,4 +19,5 @@ jobs:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         VAULT_ADDR: 'http://localhost:8200'
         TF_VAR_VAULT_ADDR: 'http://localhost:8200'
+        TF_VAR_address: 'http://localhost:8200'
     - uses: pre-commit/action@v2.0.0
