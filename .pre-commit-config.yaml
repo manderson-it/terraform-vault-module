@@ -1,0 +1,20 @@
+repos:
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: v0.1.10 # Get the latest from: https://github.com/gruntwork-io/pre-commit/releases
+    hooks:
+      # security
+      - id: detect-private-key
+      - id: detect-aws-credentials
+      # terraform
+      - id: terraform-fmt
+      - id: terraform-validate
+      - id: tflint
+      # shell and file
+      - id: end-of-file-fixer
+      - id: shellcheck
+      - id: trailing-whitespace
+      - id: check-added-large-files
+      # Check for files with names that would conflict on a case-insensitive filesystem like MacOS HFS+ or Windows FAT.
+      - id: check-case-conflict
+      # Checks that non-binary executables have a proper shebang.
+      - id: check-executables-have-shebangs
