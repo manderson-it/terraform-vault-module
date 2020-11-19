@@ -9,7 +9,7 @@ Terraform Module for Provisioning Vault Resources.
 ### Installed Software
 
 - [Terraform](https://www.terraform.io/downloads.html) ~> 0.12.29
-- [Terraform Provider for Vault]() -> 
+- [Terraform Provider for Vault](https://registry.terraform.io/providers/hashicorp/vault/latest/docs) -> 2.16.0
 
 ### Configure Terraform Cloud
 

@@ -17,4 +17,5 @@ jobs:
         tflint_version: latest
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+        VAULT_ADDR: 'http://localhost:8200'
     - uses: pre-commit/action@v2.0.0
