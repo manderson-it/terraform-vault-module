@@ -15,5 +15,6 @@ jobs:
       name: Setup TFLint
       with:
         tflint_version: latest
-        # tflint_version: v0.18.0
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
     - uses: pre-commit/action@v2.0.0
