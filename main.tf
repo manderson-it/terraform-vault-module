@@ -15,7 +15,7 @@ EOT
 }
 
 resource "vault_policy" "policy" {
-  name   = var.lp_nonprod
+  name   = var.lp
   policy = <<-EOT
 # List the KV folder
 path "${var.lp}/metadata/"
