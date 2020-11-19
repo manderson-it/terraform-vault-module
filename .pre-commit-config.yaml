@@ -2,9 +2,6 @@ repos:
   - repo: https://github.com/gruntwork-io/pre-commit
     rev: v0.1.10 # Get the latest from: https://github.com/gruntwork-io/pre-commit/releases
     hooks:
-      # security
-      - id: detect-private-key
-      - id: detect-aws-credentials
       # terraform
       - id: terraform-fmt
       - id: terraform-validate
