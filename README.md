@@ -4,6 +4,23 @@
 
 Terraform Module for Provisioning Vault Resources.
 
+## Usage
+
+Sample usage from Terraform Cloud:
+
+~~~terraform
+module "module" {
+  source  = "app.terraform.io/manderson-it/module/vault"
+  version = "1.0.0"
+
+  providers = {
+    vault = vault.platform-services
+  }
+
+  lp = "f4igh-nonprod"
+}
+~~~
+
 ## Requirements
 
 ### Installed Software

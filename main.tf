@@ -12,6 +12,9 @@ resource "vault_generic_secret" "secret" {
   "hello": "world"
 }
 EOT
+  depends_on = [
+    vault_generic_secret.secret,
+  ]
 }
 
 resource "vault_policy" "policy" {
