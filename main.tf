@@ -13,7 +13,7 @@ resource "vault_generic_secret" "secret" {
 }
 EOT
   depends_on = [
-    vault_generic_secret.secret,
+    vault_mount.mount,
   ]
 }
 
