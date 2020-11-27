@@ -17,7 +17,8 @@ module "module" {
     vault = vault.platform-services
   }
 
-  lp = "f4igh-nonprod"
+  lp_nonprod = "f4igh-nonprod"
+  lp_prod = "f4igh-nonprod"
 }
 ~~~
 
@@ -34,13 +35,8 @@ Set up your Terraform Cloud Organization/Workspace to consume this Terraform mod
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| | If false, custom mode is applied | `bool` | `true` | no |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| n/a  | n/a |
+| Name       | Description                         | Type     | Default | Required |
+|------------|-------------------------------------|----------|---------|:--------:|
+| lp_nonprod | licensePlate gets `-nonprod` suffix | `string` | none    | yes      |
+| lp_prod    | licensePlate gets `-prod` suffix    | `string` | none    | yes      |
 
