@@ -49,7 +49,6 @@ path "sys/policies/acl/${local.lp_nonprod}" {
 EOT
 }
 
-/*
 resource "vault_kubernetes_auth_backend_role" "nonprod" {
   provider    = vault.platform-services
   backend                          = "k8s-${var.cluster_name}"
@@ -59,6 +58,8 @@ resource "vault_kubernetes_auth_backend_role" "nonprod" {
   token_ttl                        = "3600"
   token_policies                   = ["default", "${local.lp_nonprod}"]
 }
+
+/*
 resource "vault_kubernetes_auth_backend_role" "nonprod2" {
   provider    = vault.platform-services
   backend                          = "k8s-${var.cluster_name}"
