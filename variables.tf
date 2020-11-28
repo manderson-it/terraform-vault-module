@@ -5,6 +5,6 @@ variable "lp" {
 
 variable "cluster_name" {
   description = "Name of OpenShift cluster (klab, clab, silver, etc.)"
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = [""]
 }
