@@ -1,3 +1,8 @@
+locals {
+  lp_nonprod = "${var.lp}-nonprod"
+  lp_prod = "${var.lp}-prod"
+}
+
 resource "vault_mount" "nonprod" {
   path        = var.lp_nonprod
   type        = "kv-v2"
