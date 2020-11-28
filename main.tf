@@ -50,7 +50,7 @@ EOT
 }
 
 resource "vault_kubernetes_auth_backend_role" "nonprod" {
-#  provider    = vault.platform-services
+  #  provider    = vault.platform-services
   backend                          = "k8s-${var.cluster_name}"
   role_name                        = local.lp_nonprod
   bound_service_account_names      = ["${var.lp}-vault"]
