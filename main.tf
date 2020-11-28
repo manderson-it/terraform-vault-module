@@ -59,19 +59,6 @@ resource "vault_kubernetes_auth_backend_role" "nonprod" {
   token_policies                   = ["default", "${local.lp_nonprod}"]
 }
 
-/*
-resource "vault_kubernetes_auth_backend_role" "nonprod2" {
-#  provider    = vault.platform-services
-  backend                          = "k8s-${var.cluster_name}"
-  # backend                          = "k8s-${cluster_name}"
-  role_name                        = local.lp_nonprod
-  bound_service_account_names      = ["${var.lp}-vault"]
-  bound_service_account_namespaces = ["${var.lp}-dev", "${var.lp}-test", "${var.lp}-tools"]
-  token_ttl                        = "3600"
-  token_policies                   = ["default", "${local.lp_nonprod}"]
-}
-*/
-
 resource "vault_mount" "prod" {
   path        = local.lp_prod
   type        = "kv-v2"
@@ -118,23 +105,12 @@ path "sys/policies/acl/${local.lp_prod}" {
 EOT
 }
 
-/*
 resource "vault_kubernetes_auth_backend_role" "prod" {
-#  provider    = vault.platform-services
-  backend                          = "k8s-${var.cluster_name}"
+  for_each                         = var.cluster_name
+  backend                          = "k8s-${each.value}"
   role_name                        = local.lp_prod
   bound_service_account_names      = ["${var.lp}-vault"]
   bound_service_account_namespaces = ["${local.lp_prod}"]
   token_ttl                        = "3600"
   token_policies                   = ["default", "${local.lp_prod}"]
 }
-resource "vault_kubernetes_auth_backend_role" "prod2" {
-#  provider    = vault.platform-services
-  backend                          = "k8s-${var.cluster_name}"
-  role_name                        = local.lp_prod
-  bound_service_account_names      = ["${var.lp}-vault"]
-  bound_service_account_namespaces = ["${local.lp_prod}"]
-  token_ttl                        = "3600"
-  token_policies                   = ["default", "${local.lp_prod}"]
-}
-*/
