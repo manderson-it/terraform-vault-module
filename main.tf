@@ -1,6 +1,6 @@
 locals {
   lp_nonprod = "${var.lp}-nonprod"
-  lp_prod = "${var.lp}-prod"
+  lp_prod    = "${var.lp}-prod"
 }
 
 resource "vault_mount" "nonprod" {
