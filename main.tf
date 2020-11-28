@@ -50,9 +50,8 @@ EOT
 }
 
 resource "vault_kubernetes_auth_backend_role" "nonprod" {
-  for_each = var.cluster_name
+  for_each                         = var.cluster_name
   backend                          = "k8s-${each.value}"
-  # backend                          = "k8s-${cluster_name}"
   role_name                        = local.lp_nonprod
   bound_service_account_names      = ["${var.lp}-vault"]
   bound_service_account_namespaces = ["${var.lp}-dev", "${var.lp}-test", "${var.lp}-tools"]
@@ -64,6 +63,7 @@ resource "vault_kubernetes_auth_backend_role" "nonprod" {
 resource "vault_kubernetes_auth_backend_role" "nonprod2" {
 #  provider    = vault.platform-services
   backend                          = "k8s-${var.cluster_name}"
+  # backend                          = "k8s-${cluster_name}"
   role_name                        = local.lp_nonprod
   bound_service_account_names      = ["${var.lp}-vault"]
   bound_service_account_namespaces = ["${var.lp}-dev", "${var.lp}-test", "${var.lp}-tools"]
