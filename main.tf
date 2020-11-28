@@ -4,13 +4,13 @@ locals {
 }
 
 resource "vault_mount" "nonprod" {
-  path        = var.lp_nonprod
+  path        = local.lp_nonprod
   type        = "kv-v2"
   description = "KV2 Secrets Engine"
 }
 
 resource "vault_generic_secret" "nonprod" {
-  path = "${var.lp_nonprod}/helloworld"
+  path = "${local.lp_nonprod}/helloworld"
 
   data_json = <<EOT
 {
@@ -23,27 +23,27 @@ EOT
 }
 
 resource "vault_policy" "nonprod" {
-  name   = var.lp_nonprod
+  name   = local.lp_nonprod
   policy = <<-EOT
 # List the KV folder
-path "${var.lp_nonprod}/metadata/"
+path "${local.lp_nonprod}/metadata/"
 {
   capabilities = ["list"]
 }
 
 # Manage secrets and versions
-path "${var.lp_nonprod}/data/*"
+path "${local.lp_nonprod}/data/*"
 {
   capabilities = ["create", "read", "update", "delete", "list"]
 }
 
 # Read own policy
-path "sys/policy/${var.lp_nonprod}"
+path "sys/policy/${local.lp_nonprod}"
 {
   capabilities = ["read", "list"]
 }
 
-path "sys/policies/acl/${var.lp_nonprod}" {
+path "sys/policies/acl/${local.lp_nonprod}" {
   capabilities = ["read", "list"]
 }
 EOT
@@ -53,31 +53,31 @@ EOT
 resource "vault_kubernetes_auth_backend_role" "nonprod" {
   provider    = vault.platform-services
   backend                          = "k8s-${var.cluster_name}"
-  role_name                        = "${var.lp_nonprod}"
+  role_name                        = "${local.lp_nonprod}"
   bound_service_account_names      = ["${var.lp}-vault"]
   bound_service_account_namespaces = ["${var.lp}-dev", "${var.lp}-test", "${var.lp}-tools"]
   token_ttl                        = "3600"
-  token_policies                   = ["default", "${var.lp_nonprod}"]
+  token_policies                   = ["default", "${local.lp_nonprod}"]
 }
 resource "vault_kubernetes_auth_backend_role" "nonprod2" {
   provider    = vault.platform-services
   backend                          = "k8s-${var.cluster_name}"
-  role_name                        = "${var.lp_nonprod}"
+  role_name                        = "${local.lp_nonprod}"
   bound_service_account_names      = ["${var.lp}-vault"]
   bound_service_account_namespaces = ["${var.lp}-dev", "${var.lp}-test", "${var.lp}-tools"]
   token_ttl                        = "3600"
-  token_policies                   = ["default", "${var.lp_nonprod}"]
+  token_policies                   = ["default", "${local.lp_nonprod}"]
 }
 */
 
 resource "vault_mount" "prod" {
-  path        = var.lp_prod
+  path        = local.lp_prod
   type        = "kv-v2"
   description = "KV2 Secrets Engine for prod."
 }
 
 resource "vault_generic_secret" "prod" {
-  path = "${var.lp_prod}/helloworld"
+  path = "${local.lp_prod}/helloworld"
 
   data_json = <<EOT
 {
@@ -90,27 +90,27 @@ EOT
 }
 
 resource "vault_policy" "prod" {
-  name   = var.lp_prod
+  name   = local.lp_prod
   policy = <<-EOT
 # List the KV folder
-path "${var.lp_prod}/metadata/"
+path "${local.lp_prod}/metadata/"
 {
   capabilities = ["list"]
 }
 
 # Manage secrets and versions
-path "${var.lp_prod}/data/*"
+path "${local.lp_prod}/data/*"
 {
   capabilities = ["create", "read", "update", "delete", "list"]
 }
 
 # Read own policy
-path "sys/policy/${var.lp_prod}"
+path "sys/policy/${local.lp_prod}"
 {
   capabilities = ["read", "list"]
 }
 
-path "sys/policies/acl/${var.lp_prod}" {
+path "sys/policies/acl/${local.lp_prod}" {
   capabilities = ["read", "list"]
 }
 EOT
@@ -120,19 +120,19 @@ EOT
 resource "vault_kubernetes_auth_backend_role" "prod" {
   provider    = vault.platform-services
   backend                          = "k8s-${var.cluster_name}"
-  role_name                        = "${var.lp_prod}"
+  role_name                        = "${local.lp_prod}"
   bound_service_account_names      = ["${var.lp}-vault"]
-  bound_service_account_namespaces = ["${var.lp_prod}"]
+  bound_service_account_namespaces = ["${local.lp_prod}"]
   token_ttl                        = "3600"
-  token_policies                   = ["default", "${var.lp_prod}"]
+  token_policies                   = ["default", "${local.lp_prod}"]
 }
 resource "vault_kubernetes_auth_backend_role" "prod2" {
   provider    = vault.platform-services
   backend                          = "k8s-${var.cluster_name}"
-  role_name                        = "${var.lp_prod}"
+  role_name                        = "${local.lp_prod}"
   bound_service_account_names      = ["${var.lp}-vault"]
-  bound_service_account_namespaces = ["${var.lp_prod}"]
+  bound_service_account_namespaces = ["${local.lp_prod}"]
   token_ttl                        = "3600"
-  token_policies                   = ["default", "${var.lp_prod}"]
+  token_policies                   = ["default", "${local.lp_prod}"]
 }
 */
